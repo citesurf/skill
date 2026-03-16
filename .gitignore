@@ -1,0 +1,6 @@
+# general
+.DS_Store
+
+# claude
+.claude.local/
+.claude/settings.local.json
