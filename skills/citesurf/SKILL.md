@@ -4,7 +4,7 @@ description: Check if AI recommends any brand. Scan URLs for AI visibility acros
 license: MIT
 metadata:
   author: citesurf
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Citesurf AI Visibility Monitoring
