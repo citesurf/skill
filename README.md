@@ -1,6 +1,6 @@
 # skill
 
-Agent skill for [Citesurf](https://citesurf.com), an AI visibility monitoring platform.
+Agent skill for [Citesurf](https://www.citesurf.com), an AI visibility monitoring platform.
 
 Check if ChatGPT, Claude, Perplexity, and Gemini recommend any brand. Get visibility scores, sentiment, competitor data, and actionable insights from your AI agent.
 

@@ -4,7 +4,7 @@ description: Check if AI recommends any brand. Scan URLs for AI visibility acros
 license: MIT
 metadata:
   author: citesurf
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Citesurf AI Visibility Monitoring
@@ -19,10 +19,10 @@ All requests require an API key in the `Authorization` header:
 Authorization: Bearer $CITESURF_API_KEY
 ```
 
-Get your API key at [citesurf.com](https://citesurf.com) > Dashboard > Settings.
+Get your API key at [citesurf.com](https://www.citesurf.com) > Dashboard > Settings.
 Requires an active Plus or Max subscription and prepaid credits for scans.
 
-Base URL: `https://citesurf.com/api/v1`
+Base URL: `https://www.citesurf.com/api/v1`
 
 ## Recommended Workflow
 
@@ -36,7 +36,7 @@ Base URL: `https://citesurf.com/api/v1`
 Verify subscription status and credit balance before triggering scans:
 
 ```bash
-curl https://citesurf.com/api/v1/account \
+curl https://www.citesurf.com/api/v1/account \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 ```
 
@@ -47,7 +47,7 @@ Returns plan (PLUS or MAX), payment status, credit balance, brand count, and bra
 Add a new URL to monitor. AI analyzes the site, generates personas and prompts, and triggers the first scan automatically:
 
 ```bash
-curl -X POST https://citesurf.com/api/v1/brands \
+curl -X POST https://www.citesurf.com/api/v1/brands \
   -H "Authorization: Bearer $CITESURF_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"name": "Acme", "website": "https://acme.com", "language": "en"}'
@@ -63,11 +63,11 @@ For brands already being monitored:
 
 ```bash
 # List all monitored brands
-curl https://citesurf.com/api/v1/brands \
+curl https://www.citesurf.com/api/v1/brands \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 
 # Get detailed brand data
-curl https://citesurf.com/api/v1/brands/{brandId} \
+curl https://www.citesurf.com/api/v1/brands/{brandId} \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 ```
 
@@ -78,7 +78,7 @@ Brand detail includes: visibility score, score change, mention rate, platform br
 Scan all 4 AI platforms for an existing brand. Costs 1 credit:
 
 ```bash
-curl -X POST https://citesurf.com/api/v1/brands/{brandId}/scan \
+curl -X POST https://www.citesurf.com/api/v1/brands/{brandId}/scan \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 ```
 
@@ -88,15 +88,15 @@ No request body required. Rate limited: 10 per hour. Returns credits used and re
 
 ```bash
 # Paginated scan list
-curl "https://citesurf.com/api/v1/brands/{brandId}/scans?offset=0&pageSize=20" \
+curl "https://www.citesurf.com/api/v1/brands/{brandId}/scans?offset=0&pageSize=20" \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 
 # Full scan detail with probes and citations
-curl https://citesurf.com/api/v1/brands/{brandId}/scans/{scanId} \
+curl https://www.citesurf.com/api/v1/brands/{brandId}/scans/{scanId} \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 
 # Visibility trends over time (7, 30, or 90 days)
-curl "https://citesurf.com/api/v1/brands/{brandId}/trends?range=30" \
+curl "https://www.citesurf.com/api/v1/brands/{brandId}/trends?range=30" \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 ```
 
@@ -104,11 +104,11 @@ curl "https://citesurf.com/api/v1/brands/{brandId}/trends?range=30" \
 
 ```bash
 # What each AI platform said about the brand, grouped by prompt
-curl https://citesurf.com/api/v1/brands/{brandId}/prompts \
+curl https://www.citesurf.com/api/v1/brands/{brandId}/prompts \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 
 # Probe results grouped by persona (how different user types discover the brand)
-curl https://citesurf.com/api/v1/brands/{brandId}/personas \
+curl https://www.citesurf.com/api/v1/brands/{brandId}/personas \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 ```
 
@@ -120,11 +120,11 @@ AI generated recommendations for improving visibility, prioritized by impact:
 
 ```bash
 # List insights
-curl https://citesurf.com/api/v1/brands/{brandId}/insights \
+curl https://www.citesurf.com/api/v1/brands/{brandId}/insights \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 
 # Dismiss or complete an insight
-curl -X PATCH https://citesurf.com/api/v1/brands/{brandId}/insights/{insightId} \
+curl -X PATCH https://www.citesurf.com/api/v1/brands/{brandId}/insights/{insightId} \
   -H "Authorization: Bearer $CITESURF_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"action": "complete"}'
@@ -140,7 +140,7 @@ Optional query parameter: `?status=pending` or `?status=completed`.
 Technical checks for brands with their own domain:
 
 ```bash
-curl https://citesurf.com/api/v1/brands/{brandId}/site-audit \
+curl https://www.citesurf.com/api/v1/brands/{brandId}/site-audit \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 ```
 
@@ -151,7 +151,7 @@ Checks: robots.txt (AI crawler access), llms.txt, schema.org JSON-LD, XML sitema
 Correct AI generated metadata such as type, category, description, or the 3 fixed monitoring prompts:
 
 ```bash
-curl -X PATCH https://citesurf.com/api/v1/brands/{brandId} \
+curl -X PATCH https://www.citesurf.com/api/v1/brands/{brandId} \
   -H "Authorization: Bearer $CITESURF_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"category": "Project Management Tool", "prompts": ["best project management tools", "is Acme PM worth it", "Acme PM vs Monday"]}'
@@ -164,7 +164,7 @@ All fields optional, only pass what you want to change. Valid types: PERSON, PRO
 Archive a brand and stop monitoring:
 
 ```bash
-curl -X DELETE https://citesurf.com/api/v1/brands/{brandId} \
+curl -X DELETE https://www.citesurf.com/api/v1/brands/{brandId} \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 ```
 
@@ -173,7 +173,7 @@ curl -X DELETE https://citesurf.com/api/v1/brands/{brandId} \
 Get a comprehensive visibility report in one call. Includes all scores, platform breakdown, top prompts, sentiment, competitors, cited domains, trends, site audit, and insights:
 
 ```bash
-curl https://citesurf.com/api/v1/brands/{brandId}/report \
+curl https://www.citesurf.com/api/v1/brands/{brandId}/report \
   -H "Authorization: Bearer $CITESURF_API_KEY"
 ```
 

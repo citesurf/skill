@@ -1,6 +1,6 @@
 # Citesurf API Reference
 
-Base URL: `https://citesurf.com/api/v1`
+Base URL: `https://www.citesurf.com/api/v1`
 
 All requests require: `Authorization: Bearer $CITESURF_API_KEY`
 
@@ -757,7 +757,7 @@ Note: `siteAudit` and `auditIssues` are omitted when no audit exists. `mentionRa
 
 ## Credit System
 
-Each scan costs 1 credit and runs across all 4 platforms (ChatGPT, Claude, Gemini, Perplexity). Reading data never costs credits. Brand creation is free. Purchase credit packs at [citesurf.com](https://citesurf.com).
+Each scan costs 1 credit and runs across all 4 platforms (ChatGPT, Claude, Gemini, Perplexity). Reading data never costs credits. Brand creation is free. Purchase credit packs at [citesurf.com](https://www.citesurf.com).
 
 ## Rate Limits
 
