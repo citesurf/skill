@@ -152,7 +152,12 @@ Body (all fields optional, at least one required):
   "type": "COMPANY",
   "category": "Project Management Tool",
   "description": "Acme helps teams plan and track work with AI powered insights.",
-  "prompts": ["best project management tools", "is Acme worth it", "Acme vs Monday"]
+  "prompts": ["best project management tools", "is Acme worth it", "Acme vs Monday"],
+  "competitors": [
+    { "name": "Monday.com", "website": "monday.com" },
+    { "name": "Asana", "website": "asana.com" },
+    { "name": "Linear" }
+  ]
 }
 ```
 
@@ -161,7 +166,8 @@ Constraints:
 - `type`: `PERSON`, `PRODUCT`, `COMPANY`, or `SHOP`
 - `category`: max 100 characters
 - `description`: max 500 characters
-- `prompts`: exactly 3 strings, 5 to 200 characters each
+- `prompts`: exactly 3 strings, 5 to 200 characters each (the first letter of each prompt is automatically capitalized on save)
+- `competitors`: between 1 and 5 entries; each has `name` (1 to 100 chars) and optional `website` (valid URL, automatically normalized, private IPs blocked); names must be unique (case-insensitive); sending the array replaces the full list (empty arrays are rejected; omit the field to leave existing competitors unchanged)
 
 Changes take effect on the next scan.
 
@@ -509,6 +515,41 @@ Query parameters:
     "hasMore": true,
     "offset": 0,
     "pageSize": 2
+  }
+}
+```
+
+### Update Persona
+
+`PATCH /brands/{brandId}/personas/{personaId}`
+
+Update the name and description of a persona. Every brand always has exactly 3 personas — you can edit them but not add or remove.
+
+Body (both fields required):
+
+```json
+{
+  "name": "Startup Founder",
+  "description": "Early stage founder evaluating tools for a growing team."
+}
+```
+
+Constraints:
+
+- `name`: 1-80 characters
+- `description`: 1-400 characters (30-60 words recommended)
+
+```json
+{
+  "data": {
+    "persona": {
+      "id": "cm...",
+      "brandId": "cm...",
+      "name": "Startup Founder",
+      "description": "Early stage founder evaluating tools for a growing team.",
+      "createdAt": "2026-01-15T10:30:00.000Z",
+      "updatedAt": "2026-03-14T08:00:00.000Z"
+    }
   }
 }
 ```
